@@ -20,14 +20,15 @@ class StockspiderSpider(scrapy.Spider):
             change = row.css('td:nth-child(6)::text').get()
             percent_gain = row.css('td:nth-child(7)::text').get()
 
-            # Now, you can structure the data into a dictionary or any other format you prefer
-            # For simplicity, let's just print the extracted data
-            print({
-                'Company Name': company_name,
-                'High': high,
-                'Low': low,
-                'Last Price': last_price,
-                'Prev Close': prev_close,
-                'Change': change,
-                '% Gain': percent_gain
-            })
+            # Check if any of the extracted data is None
+            if all([company_name, high, low, last_price, prev_close, change, percent_gain]):
+                # If all data is present, print the record
+                print({
+                    'Company Name': company_name,
+                    'High': high,
+                    'Low': low,
+                    'Last Price': last_price,
+                    'Prev Close': prev_close,
+                    'Change': change,
+                    '% Gain': percent_gain
+                })
